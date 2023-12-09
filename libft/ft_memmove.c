@@ -83,7 +83,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 //     ft_memmove(dst, data, size);
 //     printf("yes");
 
-//     // Don't forget to free allocated memory when done using it
 //     free(dst);
 //     free(data);
 

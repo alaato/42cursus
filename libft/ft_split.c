@@ -14,13 +14,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void	ft_allocate(char **tab, char const *s, char sep)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char		**tab_p;
+	char	*sub;
+	size_t	i;
+	size_t	srclen;
+
+	srclen = ft_strlen(s);
+	if (!s)
+		return (NULL);
+	if (start > srclen)
+		return (ft_strdup(""));
+	if (len >= srclen - start)
+		len = srclen - start;
+	sub = malloc(len + 1 * sizeof(char));
+	if (!sub)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+	{
+		sub[i] = s[start + i];
+	}
+	sub[i] = '\0';
+	return (sub);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*copy;
+	size_t	i;
+	size_t	src_len;
+
+	src_len = ft_strlen(s1);
+	i = -1;
+	copy = malloc(sizeof(char) * src_len + 1);
+	if (copy == NULL)
+		return (NULL);
+	while (s1[++i])
+		copy[i] = s1[i];
+	copy[i] = '\0';
+	return (copy);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	len;
+
+	len = -1;
+	while (str[++len])
+		;
+	return (len);
+}
+
+static void	ft_allocate(char **new, char const *s, char sep)
+{
+	char		**new_p;
 	char const	*tmp;
 
 	tmp = s;
-	tab_p = tab;
+	new_p = new;
 	while (*tmp)
 	{
 		while (*s == sep)
@@ -30,12 +82,13 @@ static void	ft_allocate(char **tab, char const *s, char sep)
 			++tmp;
 		if (*tmp == sep || tmp > s)
 		{
-			*tab_p = ft_substr(s, 0, tmp - s);
+			printf("%d\n", tmp-s);
+			*new_p = ft_substr(s, 0, tmp - s);
 			s = tmp;
-			++tab_p;
+			++new_p;
 		}
 	}
-	*tab_p = NULL;
+	*new_p = NULL;
 }
 
 static int	ft_count_words(char const *s, char sep)
@@ -69,3 +122,14 @@ char	**ft_split(char const *s, char c)
 	ft_allocate(new, s, c);
 	return (new);
 }
+
+// int main()
+// {
+// 	char **split = ft_split("    hello i am what you think   ",' ');
+// 	while (**split)
+// 	{
+// 		printf("# word is : %s \n",*split);
+// 		split++;
+// 	}
+// 	return 0;
+// }

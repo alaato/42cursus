@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include "libft.h"
 testIs()
 {
     // test for all 5 functions
@@ -83,4 +83,13 @@ testMemMove()
     printf("After ft_memcpy dest = %s\n", dest);
     memmove(dest, src, 2);
     printf("After memcpy dest = %s\n", dest);
+}
+testFtSplit()
+{
+    char **split = ft_split("    hello i am what you think   ",' ');
+	while (**split)
+	{
+		printf("# word is : %s \n",*split);
+		split++;
+	}
 }

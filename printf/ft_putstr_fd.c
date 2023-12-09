@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   substr.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatarban <aatarban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 23:23:43 by aatarban          #+#    #+#             */
-/*   Updated: 2023/11/27 23:23:43 by aatarban         ###   ########.fr       */
+/*   Created: 2023/11/27 22:14:06 by aatarban          #+#    #+#             */
+/*   Updated: 2023/11/28 16:47:19 by aatarban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -23,33 +23,16 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*sub;
-	size_t	i;
-	size_t	srclen;
+	int	size;
 
-	i = -1;
-	srclen = ft_strlen(s);
-	if (start > srclen)
-		return (NULL);
-	if (len == 0 || srclen == 0)
-		return (NULL);
-	if (len > srclen)
-		len = srclen;
-	sub = malloc(len + 1 * sizeof(char));
-	if (sub == NULL)
-		return (NULL);
-	while (++i < len)
-	{
-		sub[i] = s[start + i];
-	}
-	sub[i] = '\0';
-	return (sub);
+	size = ft_strlen(s);
+	write(fd, s, size);
 }
+
 // int	main(void)
 // {
-// 	char *sub = ft_substr("i ama string please", 1, 3);
-// 	printf("%s\n", sub);
-// 	printf("%s\n", "hell ");
+// 	char    *s = "hello world";
+// 	ft_putstr_fd(s, 1);
 // }
