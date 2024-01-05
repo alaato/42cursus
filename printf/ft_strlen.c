@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatarban <aatarban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 11:08:48 by aatarban          #+#    #+#             */
-/*   Updated: 2023/11/28 16:53:44 by aatarban         ###   ########.fr       */
+/*   Created: 2023/12/09 20:20:18 by aatarban          #+#    #+#             */
+/*   Updated: 2023/12/09 21:05:23 by aatarban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
-void	ft_putchar_fd(char c, int fd)
+size_t	ft_strlen(const char *str)
 {
-	write(fd, &c, 1);
+	size_t	len;
+
+	len = -1;
+	while (str[++len])
+		;
+	return (len);
 }

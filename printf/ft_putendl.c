@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatarban <aatarban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 22:14:06 by aatarban          #+#    #+#             */
-/*   Updated: 2023/12/09 21:26:28 by aatarban         ###   ########.fr       */
+/*   Created: 2023/11/28 16:46:42 by aatarban          #+#    #+#             */
+/*   Updated: 2023/12/09 21:05:12 by aatarban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putendl(char *s)
 {
 	int	size;
 
 	size = ft_strlen(s);
-	write(fd, s, size);
+	write(1, s, size);
+	write(1, "\n", 1);
 }
-
-// int	main(void)
-// {
-// 	char    *s = "hello world";
-// 	ft_putstr_fd(s, 1);
-// }

@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putunsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatarban <aatarban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 22:14:06 by aatarban          #+#    #+#             */
-/*   Updated: 2023/12/09 21:26:28 by aatarban         ###   ########.fr       */
+/*   Created: 2023/12/09 23:34:04 by aatarban          #+#    #+#             */
+/*   Updated: 2023/12/09 23:34:21 by aatarban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	put_unsigned(int n)
 {
-	int	size;
+	unsigned int nbr;
 
-	size = ft_strlen(s);
-	write(fd, s, size);
+	nbr = n;
+	if (nbr > 9)
+	{
+		ft_putnbr(nbr / 10);
+		ft_putnbr(nbr % 10);
+	}
+	else if (nbr < 10)
+	{
+		nbr = nbr + 48;
+		write(1, &(nbr), 1);
+	}
 }
-
-// int	main(void)
-// {
-// 	char    *s = "hello world";
-// 	ft_putstr_fd(s, 1);
-// }

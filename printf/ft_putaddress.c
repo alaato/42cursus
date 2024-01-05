@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putaddress.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aatarban <aatarban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 22:14:06 by aatarban          #+#    #+#             */
-/*   Updated: 2023/11/28 16:47:19 by aatarban         ###   ########.fr       */
+/*   Created: 2023/12/09 23:29:39 by aatarban          #+#    #+#             */
+/*   Updated: 2023/12/09 23:34:25 by aatarban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_putadress(unsigned long n)
 {
-	size_t	len;
-
-	len = -1;
-	while (str[++len])
-		;
-	return (len);
+	ft_puthex(n, 0);
 }
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	size;
-
-	size = ft_strlen(s);
-	write(fd, s, size);
-}
-
-// int	main(void)
-// {
-// 	char    *s = "hello world";
-// 	ft_putstr_fd(s, 1);
-// }

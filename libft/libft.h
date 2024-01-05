@@ -6,14 +6,13 @@
 /*   By: aatarban <aatarban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 19:21:28 by aatarban          #+#    #+#             */
-/*   Updated: 2023/11/28 23:50:12 by aatarban         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:54:12 by aatarban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
-# include <windows.h>
 
 int		ft_atoi(const char *str);
 

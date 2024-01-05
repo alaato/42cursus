@@ -1,3 +1,10 @@
 {
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "stdarg.h": "c",
+        "printf.h": "c",
+        "stdio.h": "c",
+        "ft_printf.h": "c"
+    },
+    "cmake.configureOnOpen": false
 }

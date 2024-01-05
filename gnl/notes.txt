@@ -1,0 +1,7 @@
+free double.
+uniinitiized = 		buffer[readret] = '\0';
+dont free stash at the end; 
+i = -1;
+	while (temp[++i] && temp[i] !='\n')
+		len++;
+		instead of ft_strlen so that it doesnt count the newline
