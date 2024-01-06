@@ -88,7 +88,7 @@ char	*trim_stash(char *start)
 	while (++i < len )
 		temp[i] = start[i + 1];
 	temp[len] = '\0';
-	if((ft_strlen(temp) == 1 && temp[0] == '\n')|| ft_strlen(temp) == 0 )
+	if(ft_strlen(temp) == 0 )
 	{
 		free(temp);
 		return (NULL);
@@ -113,12 +113,18 @@ char	*get_next_line(int fd)
 	// read buffer size and check if buffer has new line if not continue.
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
+		
 		free(stash);
+		stash = NULL;
 		free(buffer);
 		return (NULL);
 	}
 	readret = 1;
-	newline = NULL;
+	if(!stash)
+		newline = NULL;
+	else
+		newline = ft_strchr(stash, '\n');
+
 	
 	while (readret > 0)
 	{
@@ -131,9 +137,9 @@ char	*get_next_line(int fd)
 		}
 		else if (readret == 0)
 			break ;
+		buffer[readret] = '\0';
 		if (!stash)
 			stash = ft_strndup("", 0);
-		buffer[readret] = '\0';
 		temp = stash;
 		stash = ft_strjoin(stash, buffer);
 		free(temp);
@@ -150,6 +156,7 @@ char	*get_next_line(int fd)
 		temp = stash;
 		stash = trim_stash(newline);
 		free(temp);
+		newline = NULL;
 	}
 	else if (readret == 0)
 	{
@@ -164,12 +171,24 @@ char	*get_next_line(int fd)
 // {
 // 	int fd = open("text.txt", O_RDONLY);
 // 	char *array;
-// 	for (size_t i = 0; i < 2; i++)
+// 	for (size_t i = 1; i <= 4; i++)
 // 	{
+// 		if(i == 3)
+// 			array = get_next_line(-1);
+// 		else
+// 			array = get_next_line(fd);
+// 		printf("%s", array);
+// 		if (array != NULL)
+// 			free(array);
+// 	}
+// 	close(fd);
+// 	fd = open("text.txt", O_RDONLY);
+// 	for (size_t i = 1; i <= 5; i++)
+// 	{
+		
 // 		array = get_next_line(fd);
 // 		printf("%s", array);
 // 		free(array);
 // 	}
-
 // 	return 0;
 // }
