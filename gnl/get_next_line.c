@@ -15,16 +15,21 @@
 
 // char	*ft_strchr(char const *str, int c)
 // {
-// 	while (*str)
+//     if(!str)
+//         return (NULL);
+// 	else 
 // 	{
+// 		while (*str)
+// 		{
+// 			if (*str == (char)c)
+// 				return ((char *)str);
+// 			str++;
+// 		}
 // 		if (*str == (char)c)
 // 			return ((char *)str);
-// 		str++;
-// 	}
-// 	if (*str == (char)c)
-// 		return ((char *)str);
-// 	else
-// 		return (NULL);
+// 		else
+// 			return (NULL);
+// 		}
 // }
 
 // char	*ft_strjoin( char *s1,  char *s2)
@@ -35,28 +40,35 @@
 // 	size_t	j;
 // 	char	*joined;
 
-// 	len = -1;
-// 	s1_len = ft_strlen(s1);
-// 	s2_len = ft_strlen(s2);
-// 	joined = malloc((s1_len + s2_len + 1) * sizeof(char));
-// 	if (!joined)
-// 		return (NULL);
-// 	while (++len < s1_len)
-// 		joined[len] = s1[len];
-// 	j = -1;
-// 	len--;
-// 	while (++len < (s1_len + s2_len))
-// 		joined[len] = s2[++j];
-// 	joined[len] = '\0';
-// 	return (joined);
+//     if(!s1 || !s2)
+//         return (NULL);
+// 	else
+// 	{
+// 		len = -1;
+// 		s1_len = ft_strlen(s1);
+// 		s2_len = ft_strlen(s2);
+// 		joined = malloc((s1_len + s2_len + 1) * sizeof(char));
+// 		if (!joined)
+// 			return (NULL);
+// 		while (++len < s1_len)
+// 			joined[len] = s1[len];
+// 		j = -1;
+// 		len--;
+// 		while (++len < (s1_len + s2_len))
+// 			joined[len] = s2[++j];
+// 		joined[len] = '\0';
+// 		return (joined);
+// 	}
 // }
-// void	*ft_memcpy(void *dst, const void *src, size_t n)
+// void	*ft_memcpy(void *dst,  void *src, size_t n)
 // {
 // 	char	*p;
 // 	char	*p2;
 // 	size_t	i;
 
 // 	i = -1;
+// 	if(!dst || !src)
+// 		return (NULL);
 // 	p = (char *)src;
 // 	p2 = (char *)dst;
 // 	if (dst == NULL && src == NULL)
@@ -67,13 +79,16 @@
 // 	}
 // 	return (dst);
 // }
-// char *ft_strndup (const char *s, size_t n)
+// char *ft_strndup ( char *s, size_t n)
 // {
-//   char *new = (char *) malloc (n + 1);
-//   if (new == NULL)
-// 	return (NULL);
-//   new[n] = '\0';
-//   return (char *) ft_memcpy(new, s, n);
+//     char *new ;
+// 	if(!s)
+// 		return (NULL);
+//     new = (char *) malloc(n + 1);
+//     if (new == NULL)
+//     return (NULL);
+//     new[n] = '\0';
+//     return (char *) ft_memcpy(new, s, n);
 // }
 
 char	*trim_stash(char *start)
@@ -82,18 +97,26 @@ char	*trim_stash(char *start)
 	int		i;
 	char	*temp;
 
-	len = ft_strlen(start);
-	temp = malloc(sizeof(char) * (len + 1));
-	i=-1;
-	while (++i < len )
-		temp[i] = start[i + 1];
-	temp[len] = '\0';
-	if(ft_strlen(temp) == 0 )
-	{
-		free(temp);
-		return (NULL);
-	}
-	return (temp);
+    if (!start)
+        return (NULL);
+    else
+    {
+        len = ft_strlen(start);
+        temp = malloc(len + 1);
+        if(!temp)
+            return(NULL);
+        i=-1;
+        while (++i < len )
+            temp[i] = start[i + 1];
+        temp[len] = '\0';
+        if(!temp || ft_strlen(temp) == 0 )
+        {
+            free(temp);
+            return (NULL);
+        }
+        return (temp);
+    }
+
 }
 // if there is no newline just append stash to line and continue reading untill we find a new line.
 // in case there is a new line, we have to append only up to the new line
@@ -129,13 +152,7 @@ char	*get_next_line(int fd)
 	while (readret > 0)
 	{
 		readret = read(fd, buffer, BUFFER_SIZE);
-		if (readret < 0)
-		{
-			free(stash);
-			free(buffer);
-			return (NULL);
-		}
-		else if (readret == 0)
+		if (readret == 0)
 			break ;
 		buffer[readret] = '\0';
 		if (!stash)
@@ -149,7 +166,6 @@ char	*get_next_line(int fd)
 			break ;
 	}
 	line = stash;
-	free(buffer);
 	if (newline)
 	{
 		line = ft_strndup(stash, (newline + 1 - stash));
@@ -160,10 +176,9 @@ char	*get_next_line(int fd)
 	}
 	else if (readret == 0)
 	{
-		if(line == NULL)
-			return (NULL);
 		stash = NULL;
 	}
+    free(buffer);
 	return (line);
 }
 
@@ -171,22 +186,12 @@ char	*get_next_line(int fd)
 // {
 // 	int fd = open("text.txt", O_RDONLY);
 // 	char *array;
-// 	for (size_t i = 1; i <= 4; i++)
+// 	for (size_t i = 1; i <= 6; i++)
 // 	{
-// 		if(i == 3)
+// 		if(i == 10)
 // 			array = get_next_line(-1);
 // 		else
 // 			array = get_next_line(fd);
-// 		printf("%s", array);
-// 		if (array != NULL)
-// 			free(array);
-// 	}
-// 	close(fd);
-// 	fd = open("text.txt", O_RDONLY);
-// 	for (size_t i = 1; i <= 5; i++)
-// 	{
-		
-// 		array = get_next_line(fd);
 // 		printf("%s", array);
 // 		free(array);
 // 	}

@@ -5,3 +5,6 @@ i = -1;
 	while (temp[++i] && temp[i] !='\n')
 		len++;
 		instead of ft_strlen so that it doesnt count the newline
+		
+		
+when you free stash i have to set stash to nul otherwise it would be already freed and when the tester tries to free, it will say double free
