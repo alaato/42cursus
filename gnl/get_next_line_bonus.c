@@ -1,8 +1,8 @@
-#include "get_next_line.h"
+# include "get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-#include <stdio.h>
+# include <stdio.h>
 
 // size_t	ft_strlen(const char *str)
 // {
@@ -112,7 +112,7 @@ char	*trim_stash(char *start)
         len = ft_strlen(start);
         temp = malloc(len + 1);
         if(!temp)
-			return(NULL);
+				return(NULL);
         i=-1;
         while (++i < len && start[i + 1])
             temp[i] = start[i + 1];
@@ -131,7 +131,7 @@ char	*trim_stash(char *start)
 //
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[4096];
 	char		*buffer;
 	int			readret;
 	char		*line;
@@ -141,22 +141,22 @@ char	*get_next_line(int fd)
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 	{
-				stash = NULL;
+				stash[fd] = NULL;
 				return (NULL);
 	}
 	// read buffer size and check if buffer has new line if not continue.
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free(stash);
-		stash = NULL;
+		free(stash[fd]);
+		stash[fd] = NULL;
 		free(buffer);
 		return (NULL);
 	}
 	readret = 1;
-	if(!stash)
+	if(!stash[fd])
 		newline = NULL;
 	else
-		newline = ft_strchr(stash, '\n');
+		newline = ft_strchr(stash[fd], '\n');
 
 	
 	while (readret > 0)
@@ -164,55 +164,55 @@ char	*get_next_line(int fd)
 		readret = read(fd, buffer, BUFFER_SIZE);
 		if (readret < 0)
 		{
-			free(stash);
+			free(stash[fd]);
 			return(NULL);
 		}
 		
 		if (readret == 0)
 			break ;
 		buffer[readret] = '\0';
-		if (!stash)
-			stash = ft_strndup("", 0);
-		temp = stash;
-		stash = ft_strjoin(stash, buffer);
+		if (!stash[fd])
+			stash[fd] = ft_strndup("", 0);
+		temp = stash[fd];
+		stash[fd] = ft_strjoin(stash[fd], buffer);
 		free(temp);
 		temp = NULL;
-		newline = ft_strchr(stash, '\n');
+		newline = ft_strchr(stash[fd], '\n');
 		if (newline)
 			break ;
 	}
-	line = stash;
+	line = stash[fd];
 	if (newline)
 	{
-		line = ft_strndup(stash, (newline + 1 - stash));
-		temp = stash;
-		stash = trim_stash(newline);
+		line = ft_strndup(stash[fd], (newline + 1 - stash[fd]));
+		temp = stash[fd];
+		stash[fd] = trim_stash(newline);
 		free(temp);
 		newline = NULL;
 	}
 	else if (readret == 0)
 	{
-		stash = NULL;
+		stash[fd] = NULL;
 	}
     free(buffer);
 	return (line);
 }
 
-int	main(void)
-{
+// int	main(void)
+// {
 	   
 
-	int fd ;
-	fd = open( "text.txt", O_RDONLY);
-	char *array;
-	for (size_t i = 1; i <= 7; i++)
-	{
-		if(i == 10)
-			array = get_next_line(-1);
-		else
-			array = get_next_line(fd);
-		printf("%s", array);
-		free(array);
-	}
-	return 0;
-}
+// 	int fd ;
+// 	fd = open( "text.txt", O_RDONLY);
+// 	char *array;
+// 	for (size_t i = 1; i <= 7; i++)
+// 	{
+// 		if(i == 10)
+// 			array = get_next_line(-1);
+// 		else
+// 			array = get_next_line(fd);
+// 		printf("%s", array);
+// 		free(array);
+// 	}
+// 	return 0;
+// }

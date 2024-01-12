@@ -45,7 +45,9 @@ char	*ft_strjoin( char *s1,  char *s2)
 		s2_len = ft_strlen(s2);
 		joined = malloc((s1_len + s2_len + 1) * sizeof(char));
 		if (!joined)
+		{
 				return (NULL);
+		}
 		while (++len < s1_len)
 			joined[len] = s1[len];
 		j = -1;
@@ -83,6 +85,6 @@ char *ft_strndup ( char const *s, size_t n)
     new = (char *) malloc(n + 1);
     if (new == NULL)
 		return (NULL);
-	new[n] = '\0';
+    new[n] = '\0';
     return (char *) ft_memcpy(new, s, n);
 }
