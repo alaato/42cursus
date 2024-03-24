@@ -1,0 +1,14 @@
+{
+	"cmake.configureOnOpen": true,
+	"cmake.sourceDirectory": "/home/alaa/42/pushswap/.vscode",
+	"files.associations": {
+		"*.ejs": "html",
+		"push_swap.h": "c",
+		"random": "c",
+		"chrono": "c",
+		"limits": "c",
+		"semaphore": "c",
+		"algorithm": "c",
+		"numbers": "c"
+	}
+}
