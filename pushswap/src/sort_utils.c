@@ -6,7 +6,7 @@
 /*   By: alaa <alaa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 03:37:30 by alaa              #+#    #+#             */
-/*   Updated: 2024/03/22 03:37:44 by alaa             ###   ########.fr       */
+/*   Updated: 2024/03/24 23:37:42 by alaa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,23 @@ int	is_sorted(t_stack *stack)
 		curr = curr->next;
 	}
 	return (1);
+}
+int	find_min(t_stack *stack)
+{
+	t_node	*curr;
+	int		i;
+	int		min;
+
+	curr = stack->head;
+	i = 0;
+	min = stack->head->value;
+	while (++i < stack->size)
+	{
+		if (curr->value < min)
+			min = curr->value;
+		curr = curr->next;
+	}
+	return (min);
 }
 
 void	set_min_max(int *min, int *max, t_node *head)

@@ -6,7 +6,7 @@
 /*   By: alaa <alaa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 16:44:04 by alaa              #+#    #+#             */
-/*   Updated: 2024/03/22 04:27:45 by alaa             ###   ########.fr       */
+/*   Updated: 2024/03/24 23:10:47 by alaa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ int	find_median(t_stack *stack)
 	if (!arr)
 		return (0);
 	list_to_arr(arr, stack);
-	if (stack->size % 2 == 1)
-		med = quickselect(arr, (stack->size) / 2, stack->size);
-	else
-		med = quickselect(arr, (stack->size / 2), stack->size);
+	med = quickselect(arr, (stack->size) / 2, stack->size);
 	free(arr);
 	return (med);
 }

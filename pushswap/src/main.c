@@ -6,13 +6,13 @@
 /*   By: alaa <alaa@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:23:05 by alaa              #+#    #+#             */
-/*   Updated: 2024/03/23 01:55:27 by alaa             ###   ########.fr       */
+/*   Updated: 2024/03/25 01:22:44 by alaa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	find_min(t_stack *stack)
+int	find_min_index(t_stack *stack)
 {
 	int		i;
 	int		min;
@@ -42,7 +42,8 @@ int	main(int arc, char **args)
 	{
 		init_program(&program, &a, &b);
 		fill_stack_many_args(arc, args, &a);
+		print_stack(&a);
 		sort(&a, &b);
-		// print_stack(&a);
+		print_stack(&a);
 	}
 }
